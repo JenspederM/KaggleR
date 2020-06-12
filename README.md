@@ -10,3 +10,10 @@ Specifically, the package contain four categories of functions:
 4. Config
 
 For each category, all the corresponding commands from the Kaggle API has been added.
+
+## Installation
+
+To install the package use:
+```
+devtools::install_github("JensPederM/KaggleR")
+```
