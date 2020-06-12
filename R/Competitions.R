@@ -6,10 +6,13 @@
 #' @param sort_by Sort list results. Default is 'latestDeadline'. Valid options are 'grouped', 'prize', 'earliestDeadline', 'latestDeadline', 'numberOfTeams', and 'recentlyCreated'
 #' @param search Term(s) to search for
 #' @return `data.frame`
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_competitions_list(category = "gettingStarted")
 #' kaggle_competitions_list(search = "health")
+#'
+#' @export
 kaggle_competitions_list <- function(group = c('general', 'entered', 'inClass'),
                                      category = c('all', 'featured', 'research', 'recruitment', 'gettingStarted', 'masters', 'playground'),
                                      sort_by = c('latestDeadline','grouped', 'prize', 'earliestDeadline',  'numberOfTeams', 'recentlyCreated'),
@@ -30,10 +33,12 @@ kaggle_competitions_list <- function(group = c('general', 'entered', 'inClass'),
 #'
 #' @param competition Competition URL suffix (use `kaggle_competitions_list()` to show options)
 #' @param quiet Suppress printing information about the upload/download progress
-#' @return `data.frame`
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_competitions_files(competition = "favorita-grocery-sales-forecasting")
+#'
+#' @export
 kaggle_competitions_files <- function(competition, quiet = FALSE) {
   cmd <- paste("kaggle competitions files", competition)
   if (isTRUE(quiet)) {
@@ -53,12 +58,15 @@ kaggle_competitions_files <- function(competition, quiet = FALSE) {
 #' @param path Folder where file(s) will be downloaded, defaults to current working directory
 #' @param force Skip check whether local version of file is up to date, force file download
 #' @param quiet Suppress printing information about the upload/download progress
-#' @return `NULL`
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_competitions_download_files(competition = "favorita-grocery-sales-forecasting")
 #' kaggle_competitions_download_files(competition = "favorita-grocery-sales-forecasting",
 #'                                    file_name = "test.csv.7z")
+#'
+#'
+#' @export
 kaggle_competitions_download_files <- function(competition, file_name = NULL, path = NULL, force = FALSE, quiet = FALSE) {
   cmd <- "kaggle competitions download"
   if (!is.null(file_name)) {
@@ -87,11 +95,15 @@ kaggle_competitions_download_files <- function(competition, file_name = NULL, pa
 #' @param file_name File for upload (full path)
 #' @param message Message describing this submission
 #' @param quiet Suppress printing information about the upload/download progress
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_competitions_submit(competition = "favorita-grocery-sales-forecasting",
 #'                            file_name = "sample_submission_favorita.csv.7z",
 #'                            message = "My submission message")
+#'
+#'
+#' @export
 kaggle_competitions_submit <- function(competition, file_name, message, quiet = FALSE) {
   cmd <- paste("kaggle competitions submit", competition, "-f", file_name, "-m", message)
   if (isTRUE(quiet)) {
@@ -109,9 +121,13 @@ kaggle_competitions_submit <- function(competition, file_name, message, quiet = 
 #'
 #' @param competition Competition URL suffix (use `kaggle_competitions_list()` to show options)
 #' @param quiet Suppress printing information about the upload/download progress
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_competitions_submissions(competition = "favorita-grocery-sales-forecasting")
+#'
+#'
+#' @export
 kaggle_competitions_submissions <- function(competition, quiet = FALSE) {
   cmd <- paste("kaggle competitions submissions", competition)
   if (isTRUE(quiet)) {
@@ -128,13 +144,17 @@ kaggle_competitions_submissions <- function(competition, quiet = FALSE) {
 #' @param download Download entire leaderboard
 #' @param path Folder where file(s) will be downloaded, defaults to current working directory
 #' @param quiet Suppress printing information about the upload/download progress
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_competitions_leaderboard(competition = "favorita-grocery-sales-forecasting")
 #' kaggle_competitions_leaderboard(competition = "favorita-grocery-sales-forecasting",
 #'                                 download = TRUE)
 #' kaggle_competitions_leaderboard(competition = "favorita-grocery-sales-forecasting",
 #'                                 download = TRUE, path = "./path")
+#'
+#'
+#' @export
 kaggle_competitions_leaderboard <- function(competition, show = TRUE, download = FALSE, path = NULL, quiet = FALSE) {
   cmd <- paste("kaggle competitions leaderboard", competition)
   if (isTRUE(quiet)) {

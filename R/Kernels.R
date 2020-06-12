@@ -12,10 +12,14 @@
 #' @param kernel_type Specify the type of kernel. Default is 'all'. Valid options are 'all', 'script', and 'notebook'
 #' @param output_type Search for specific kernel output types. Default is 'all'. Valid options are 'all', 'visualizations', and 'data'
 #' @param sort_by Sort list results. Default is 'hotness'.  Valid options are 'hotness', 'commentCount', 'dateCreated', 'dateRun', 'relevance', 'scoreAscending', 'scoreDescending', 'viewCount', and 'voteCount'. 'relevance' is only applicable if a search term is specified.
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_kernels_list(search = "titanic")
 #' kaggle_kernels_list(language = "python")
+#'
+#'
+#' @export
 kaggle_kernels_list <- function(mine = FALSE, size = 20, search = NULL, parent = NULL,
                                 competition = NULL, dataset = NULL, user = NULL,
                                 language = c("all", "python", "r", "sqlite", "julia"),
@@ -58,9 +62,13 @@ kaggle_kernels_list <- function(mine = FALSE, size = 20, search = NULL, parent =
 #' Initialize Metadata File for a Kernel
 #'
 #' @param folder Folder for upload, containing data files and a special kernel-metadata.json file (https://github.com/Kaggle/kaggle-api/wiki/Kernel-Metadata).
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_kernels_init(folder = "./path/to/kernel")
+#'
+#'
+#' @export
 kaggle_kernels_init <- function(folder) {
   cmd <- paste("kaggle kernels init --path", folder)
   return(kaggle_build_script(cmd))
@@ -69,9 +77,13 @@ kaggle_kernels_init <- function(folder) {
 #' Push a Kernel
 #'
 #' @param folder Folder for upload, containing data files and a special kernel-metadata.json file (https://github.com/Kaggle/kaggle-api/wiki/Kernel-Metadata).
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_kernels_push(folder = "./path/to/kernel")
+#'
+#'
+#' @export
 kaggle_kernels_push <- function(folder) {
   cmd <- paste("kaggle kernels push --path", folder)
   return(kaggle_build_script(cmd))
@@ -83,9 +95,13 @@ kaggle_kernels_push <- function(folder) {
 #' @param kernel Kernel URL suffix in format <owner>/<kernel-name> (use `kaggle_kernels_list()` to show options)
 #' @param path Folder where file(s) will be downloaded, defaults to current working directory
 #' @param metadata Generate metadata when pulling kernel
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_kernels_pull(kernel = "rtatman/list-of-5-day-challenges", path = "/path/to/dest")
+#'
+#'
+#' @export
 kaggle_kernels_pull <- function(kernel, path = NULL, metadata = FALSE) {
   cmd <- paste("kaggle kernels pull", kernel)
   if (!is.null(path)) {
@@ -104,9 +120,13 @@ kaggle_kernels_pull <- function(kernel, path = NULL, metadata = FALSE) {
 #' @param path Folder where file(s) will be downloaded, defaults to current working directory
 #' @param force Skip check whether local version of file is up to date, force file download
 #' @param quiet Suppress printing information about the upload/download progress
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_kernels_output(kernel = "mrisdal/exploring-survival-on-the-titanic", path = "/path/to/dest")
+#'
+#'
+#' @export
 kaggle_kernels_output <- function(kernel, path = NULL, force = FALSE, quiet = FALSE) {
   cmd <- paste("kaggle kernels output", kernel)
   if (!is.null(path)) {
@@ -125,9 +145,13 @@ kaggle_kernels_output <- function(kernel, path = NULL, force = FALSE, quiet = FA
 #' Get the Status of the Latest Kernel Run
 #'
 #' @param kernel Kernel URL suffix in format <owner>/<kernel-name> (use `kaggle_kernels_list()` to show options)
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_kernels_status(kernel = "mrisdal/exploring-survival-on-the-titanic")
+#'
+#'
+#' @export
 kaggle_kernels_status <- function(kernel) {
   cmd <- paste("kaggle kernels output", kernel)
   return(kaggle_build_script(cmd))

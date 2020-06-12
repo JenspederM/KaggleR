@@ -1,9 +1,11 @@
 
 #' View Current Config Values
 #'
-#' @export
 #' @examples
 #' kaggle_config_view()
+#'
+#'
+#' @export
 kaggle_config_view <- function() {
   cmd <- "kaggle config view"
   return(kaggle_build_script(cmd))
@@ -18,9 +20,13 @@ kaggle_config_view <- function() {
 #'
 #' @param name Name of the configuration parameter (one of competition, path, proxy)
 #' @param value Value of the configuration parameter
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_config_set(name = "competition", value = "titanic")
+#'
+#'
+#' @export
 kaggle_config_set <- function(name, value) {
   name <- match.arg(name, choices = c("competition", "path", "proxy"))
   cmd <- paste("kaggle config set --name", name, "--value", value)
@@ -30,9 +36,13 @@ kaggle_config_set <- function(name, value) {
 #' Clear a configuration value
 #'
 #' @param name Name of the configuration parameter
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_config_unset(name = "competition")
+#'
+#'
+#' @export
 kaggle_config_unset <- function(name) {
   name <- match.arg(name, choices = c("competition", "path", "proxy"))
   cmd <- paste("kaggle config unset --name", name)

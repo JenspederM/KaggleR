@@ -10,10 +10,14 @@
 #' @param search Term(s) to search for
 #' @param mine Display only my items
 #' @param user Find public datasets owned by a specific user or organization
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_datasets_list(search = "demographies")
 #' kaggle_datasets_list(sort_by = "votes")
+#'
+#'
+#' @export
 kaggle_datasets_list <- function(sort_by = c('hottest', 'votes', 'updated', 'active'),
                                  file_type = c('all', 'csv', 'sqlite', 'json', 'bigQuery'),
                                  license_name = c('all', 'cc', 'gpl', 'odb', 'other'),
@@ -52,9 +56,13 @@ kaggle_datasets_list <- function(sort_by = c('hottest', 'votes', 'updated', 'act
 #' List Files for a Dataset
 #'
 #' @param dataset  Dataset URL suffix in format <owner>/<dataset-name> (use "kaggle_datasets_list()" to show options)
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_datasets_files("zillow/zecon")
+#'
+#'
+#' @export
 kaggle_datasets_files <- function(dataset) {
   cmd <- paste("kaggle datasets files", dataset)
   return(kaggle_command_to_df(cmd))
@@ -71,10 +79,14 @@ kaggle_datasets_files <- function(dataset) {
 #' @param unzip Unzip the downloaded file. Will delete the zip file when completed.
 #' @param force Skip check whether local version of file is up to date, force file download
 #' @param quiet Suppress printing information about the upload/download progress
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_datasets_download("zillow/zecon")
 #' kaggle_datasets_download("zillow/zecon", file_name = "State_time_series.csv")
+#'
+#'
+#' @export
 kaggle_datasets_download <- function(dataset, file_name = NULL, path = NULL, unzip = FALSE, force = FALSE, quiet = FALSE) {
   cmd <- paste("kaggle datasets download", dataset)
   if (!is.null(file_name)) {
@@ -99,9 +111,13 @@ kaggle_datasets_download <- function(dataset, file_name = NULL, path = NULL, unz
 #' Initialize Metadata file for Dataset Creation
 #'
 #' @param folder Folder for upload, containing data files and a special dataset-metadata.json file (https://github.com/Kaggle/kaggle-api/wiki/Dataset-Metadata).
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_datasets_init(folder = "./path/to/dataset")
+#'
+#'
+#' @export
 kaggle_datasets_init <- function(folder) {
   cmd <- paste("kaggle datasets init --path", folder)
 }
@@ -116,9 +132,13 @@ kaggle_datasets_init <- function(folder) {
 #' @param keep_tabular Do not convert tabular files to CSV (default is to convert)
 #' @param quiet Suppress printing information about the upload/download progress
 #' @param dir_mode What to do with directories: "skip" - ignore; "zip" - compressed upload; "tar" - uncompressed upload
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_datasets_create(folder = "./path/to/dataset")
+#'
+#'
+#' @export
 kaggle_datasets_create <- function(folder, public = FALSE, keep_tabular = FALSE, dir_mode = c("skip", "zip", "tar"), quiet = FALSE) {
   dir_mode <- match.arg(dir_mode)
   cmd <- paste("kaggle datasets create --path", folder, "--dir-mode", dir_mode)
@@ -143,9 +163,13 @@ kaggle_datasets_create <- function(folder, public = FALSE, keep_tabular = FALSE,
 #' @param dir_mode What to do with directories: "skip" - ignore; "zip" - compressed upload; "tar" - uncompressed upload
 #' @param delete_old_versions Delete old versions of this dataset
 #' @param quiet Suppress printing information about the upload/download progress
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_datasets_version(folder = "./path/to/dataset", version_notes = "Updated data")
+#'
+#'
+#' @export
 kaggle_datasets_version <- function(folder, version_notes, keep_tabular = FALSE, dir_mode = c("skip", "zip", "tar"), delete_old_versions = FALSE, quiet = FALSE) {
   dir_mode <- match.arg(dir_mode)
   cmd <- paste("kaggle datasets version --path", folder, "--message", version_notes)
@@ -166,9 +190,13 @@ kaggle_datasets_version <- function(folder, version_notes, keep_tabular = FALSE,
 #'
 #' @param dataset Dataset URL suffix in format <owner>/<dataset-name> (use `kaggle_datasets_list()`to show options)
 #' @param path Location to download dataset metadata to. Defaults to current working directory
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_datasets_metadata(dataset = "zillow/zecon", path = "./path/to/download")
+#'
+#'
+#' @export
 kaggle_datasets_metadata <- function(dataset, path = NULL) {
   cmd <- paste("kaggle datasets metadata", dataset)
   if (!is.null(path)) {
@@ -180,9 +208,13 @@ kaggle_datasets_metadata <- function(dataset, path = NULL) {
 #' Get Dataset Creation Status
 #'
 #' @param dataset dataset Dataset URL suffix in format <owner>/<dataset-name> (use `kaggle_datasets_list()`to show options)
-#' @export
+#'
+#'
 #' @examples
 #' kaggle_datasets_status("zillow/zecon")
+#'
+#'
+#' @export
 kaggle_datasets_status <- function(dataset) {
   cmd <- paste("kaggle datasets status", dataset)
   return(kaggle_build_script(cmd))
