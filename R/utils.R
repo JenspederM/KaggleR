@@ -30,7 +30,7 @@ kaggle_command_to_df <- function(command, verbose = TRUE) {
 
 
 # Redirect output to csv and read as list ---------------------------------
-kaggle_command_to_list <- function(command, verbose = TRUE) {
+kaggle_get_config <- function(command, verbose = TRUE) {
   on.exit(unlink(tmp))
   if (isTRUE(verbose)) {
     cat("Executing command: ", command, "\n\n")

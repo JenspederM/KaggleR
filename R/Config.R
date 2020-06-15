@@ -8,7 +8,7 @@
 #' @export
 kaggle_config_view <- function() {
   cmd <- "kaggle config view"
-  return(kaggle_command_to_list(cmd))
+  return(kaggle_get_config(cmd))
 }
 
 #' Set a Configuration Value
