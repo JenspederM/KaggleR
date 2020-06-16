@@ -14,4 +14,6 @@ Clear a configuration value
 }
 \examples{
 kaggle_config_unset(name = "competition")
+
+
 }

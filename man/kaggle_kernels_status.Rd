@@ -14,4 +14,6 @@ Get the Status of the Latest Kernel Run
 }
 \examples{
 kaggle_kernels_status(kernel = "mrisdal/exploring-survival-on-the-titanic")
+
+
 }

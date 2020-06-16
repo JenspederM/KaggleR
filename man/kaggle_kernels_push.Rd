@@ -14,4 +14,6 @@ Push a Kernel
 }
 \examples{
 kaggle_kernels_push(folder = "./path/to/kernel")
+
+
 }

@@ -14,4 +14,6 @@ Initialize Metadata file for Dataset Creation
 }
 \examples{
 kaggle_datasets_init(folder = "./path/to/dataset")
+
+
 }

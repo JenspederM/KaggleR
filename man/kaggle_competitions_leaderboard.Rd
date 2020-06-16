@@ -24,7 +24,7 @@ kaggle_competitions_leaderboard(
 \item{quiet}{Suppress printing information about the upload/download progress}
 }
 \description{
-Get Competition Leaderboard
+If both download and show are `TRUE`, then quiet will be `TRUE` as well.
 }
 \examples{
 kaggle_competitions_leaderboard(competition = "favorita-grocery-sales-forecasting")
@@ -32,4 +32,6 @@ kaggle_competitions_leaderboard(competition = "favorita-grocery-sales-forecastin
                                 download = TRUE)
 kaggle_competitions_leaderboard(competition = "favorita-grocery-sales-forecasting",
                                 download = TRUE, path = "./path")
+
+
 }

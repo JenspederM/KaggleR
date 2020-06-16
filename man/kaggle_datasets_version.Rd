@@ -7,8 +7,8 @@
 kaggle_datasets_version(
   folder,
   version_notes,
-  keep_tabular = FALSE,
   dir_mode = c("skip", "zip", "tar"),
+  keep_tabular = FALSE,
   delete_old_versions = FALSE,
   quiet = FALSE
 )
@@ -18,9 +18,9 @@ kaggle_datasets_version(
 
 \item{version_notes}{Message describing the new version}
 
-\item{keep_tabular}{Do not convert tabular files to CSV (default is to convert)}
-
 \item{dir_mode}{What to do with directories: "skip" - ignore; "zip" - compressed upload; "tar" - uncompressed upload}
+
+\item{keep_tabular}{Do not convert tabular files to CSV (default is to convert)}
 
 \item{delete_old_versions}{Delete old versions of this dataset}
 
@@ -31,4 +31,6 @@ Creata a New Dataset Version
 }
 \examples{
 kaggle_datasets_version(folder = "./path/to/dataset", version_notes = "Updated data")
+
+
 }

@@ -11,12 +11,11 @@ kaggle_competitions_files(competition, quiet = FALSE)
 
 \item{quiet}{Suppress printing information about the upload/download progress}
 }
-\value{
-`data.frame`
-}
 \description{
 Note: you will need to accept competition rules at https://www.kaggle.com/c/<competition-name>/rules.
 }
 \examples{
 kaggle_competitions_files(competition = "favorita-grocery-sales-forecasting")
+
+
 }

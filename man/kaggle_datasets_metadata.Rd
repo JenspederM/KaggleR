@@ -4,16 +4,20 @@
 \alias{kaggle_datasets_metadata}
 \title{Download Metadata for an Existing Dataset}
 \usage{
-kaggle_datasets_metadata(dataset, path = NULL)
+kaggle_datasets_metadata(dataset, path = NULL, update = FALSE)
 }
 \arguments{
 \item{dataset}{Dataset URL suffix in format <owner>/<dataset-name> (use `kaggle_datasets_list()`to show options)}
 
 \item{path}{Location to download dataset metadata to. Defaults to current working directory}
+
+\item{update}{A flag to indicate whether the dataset metadata should be updated.}
 }
 \description{
 Download Metadata for an Existing Dataset
 }
 \examples{
 kaggle_datasets_metadata(dataset = "zillow/zecon", path = "./path/to/download")
+
+
 }

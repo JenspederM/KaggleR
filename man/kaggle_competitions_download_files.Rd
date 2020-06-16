@@ -23,9 +23,6 @@ kaggle_competitions_download_files(
 
 \item{quiet}{Suppress printing information about the upload/download progress}
 }
-\value{
-`NULL`
-}
 \description{
 Note: you will need to accept competition rules at https://www.kaggle.com/c/<competition-name>/rules.
 }
@@ -33,4 +30,6 @@ Note: you will need to accept competition rules at https://www.kaggle.com/c/<com
 kaggle_competitions_download_files(competition = "favorita-grocery-sales-forecasting")
 kaggle_competitions_download_files(competition = "favorita-grocery-sales-forecasting",
                                    file_name = "test.csv.7z")
+
+
 }

@@ -14,4 +14,6 @@ Initialize Metadata File for a Kernel
 }
 \examples{
 kaggle_kernels_init(folder = "./path/to/kernel")
+
+
 }

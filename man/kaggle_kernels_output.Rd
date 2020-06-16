@@ -20,4 +20,6 @@ Retrieve a Kernel's output
 }
 \examples{
 kaggle_kernels_output(kernel = "mrisdal/exploring-survival-on-the-titanic", path = "/path/to/dest")
+
+
 }

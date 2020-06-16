@@ -18,4 +18,6 @@ Pull a Kernel
 }
 \examples{
 kaggle_kernels_pull(kernel = "rtatman/list-of-5-day-challenges", path = "/path/to/dest")
+
+
 }

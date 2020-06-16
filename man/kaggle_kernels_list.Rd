@@ -48,4 +48,6 @@ List Kernels
 \examples{
 kaggle_kernels_list(search = "titanic")
 kaggle_kernels_list(language = "python")
+
+
 }

@@ -6,20 +6,20 @@
 \usage{
 kaggle_datasets_create(
   folder,
+  dir_mode = c("skip", "zip", "tar"),
   public = FALSE,
   keep_tabular = FALSE,
-  dir_mode = c("skip", "zip", "tar"),
   quiet = FALSE
 )
 }
 \arguments{
 \item{folder}{Folder for upload, containing data files and a special dataset-metadata.json file (https://github.com/Kaggle/kaggle-api/wiki/Dataset-Metadata).}
 
+\item{dir_mode}{What to do with directories (default is "skip"): "skip" - ignore; "zip" - compressed upload; "tar" - uncompressed upload}
+
 \item{public}{Create publicly (default is private)}
 
 \item{keep_tabular}{Do not convert tabular files to CSV (default is to convert)}
-
-\item{dir_mode}{What to do with directories: "skip" - ignore; "zip" - compressed upload; "tar" - uncompressed upload}
 
 \item{quiet}{Suppress printing information about the upload/download progress}
 }
@@ -28,4 +28,6 @@ Create a new dataset
 }
 \examples{
 kaggle_datasets_create(folder = "./path/to/dataset")
+
+
 }

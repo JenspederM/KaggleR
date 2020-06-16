@@ -11,4 +11,6 @@ View Current Config Values
 }
 \examples{
 kaggle_config_view()
+
+
 }

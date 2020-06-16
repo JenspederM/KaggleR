@@ -4,14 +4,19 @@
 \alias{kaggle_competitions_submit}
 \title{Submit to a Competition}
 \usage{
-kaggle_competitions_submit(competition, file_name, message, quiet = FALSE)
+kaggle_competitions_submit(
+  file_name,
+  message,
+  competition = NULL,
+  quiet = FALSE
+)
 }
 \arguments{
-\item{competition}{Competition URL suffix (use `kaggle_competitions_list()` to show options)}
-
 \item{file_name}{File for upload (full path)}
 
 \item{message}{Message describing this submission}
+
+\item{competition}{Competition URL suffix (use `kaggle_competitions_list()` to show options). If empty, the default competition will be used (use "kaggle config set competition")"}
 
 \item{quiet}{Suppress printing information about the upload/download progress}
 }
@@ -22,4 +27,6 @@ Note: you will need to accept competition rules at https://www.kaggle.com/c/<com
 kaggle_competitions_submit(competition = "favorita-grocery-sales-forecasting",
                            file_name = "sample_submission_favorita.csv.7z",
                            message = "My submission message")
+
+
 }

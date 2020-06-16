@@ -16,4 +16,6 @@ Note: you will need to accept competition rules at https://www.kaggle.com/c/<com
 }
 \examples{
 kaggle_competitions_submissions(competition = "favorita-grocery-sales-forecasting")
+
+
 }

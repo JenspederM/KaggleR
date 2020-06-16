@@ -95,7 +95,6 @@ kaggle_competitions_submit <- function(file_name, message, competition = NULL, q
                "--file", file_name,
                "--message", message)
   cmd <- add_quiet(cmd, quiet)
-
   return(kaggle_build_script(cmd))
 }
 
@@ -115,7 +114,6 @@ kaggle_competitions_submit <- function(file_name, message, competition = NULL, q
 kaggle_competitions_submissions <- function(competition, quiet = FALSE) {
   cmd <- paste("kaggle competitions submissions", competition)
   cmd <- add_quiet(cmd, quiet)
-
   return(kaggle_command_to_df(cmd))
 }
 

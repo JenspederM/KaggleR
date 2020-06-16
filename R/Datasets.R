@@ -10,6 +10,7 @@
 #' @param search Term(s) to search for
 #' @param mine Display only my items
 #' @param user Find public datasets owned by a specific user or organization
+#' @param page Page number for results paging. Page size is 20 by default
 #'
 #'
 #' @examples
@@ -22,33 +23,21 @@ kaggle_datasets_list <- function(sort_by = c('hottest', 'votes', 'updated', 'act
                                  file_type = c('all', 'csv', 'sqlite', 'json', 'bigQuery'),
                                  license_name = c('all', 'cc', 'gpl', 'odb', 'other'),
                                  max_size = NULL, min_size = NULL,  tag_ids = NULL,
-                                 search = NULL, mine = NULL, user = NULL) {
-  sort_by <- match.arg(sort_by)
-  file_type <- match.arg(file_type)
-  license_name <- match.arg(license_name)
-  cmd <- paste("kaggle datasets list", "--sort-by", sort_by, "--file-type", file_type, "--license", license_name)
-  if (!is.null(max_size)) {
-    cmd <- paste(cmd, "--max-size", max_size)
+                                 search = NULL, user = NULL, mine = FALSE, page = NULL) {
+  if (length(tag_ids) > 1) {
+    tag_ids <- paste(tag_ids, collapse = ", ")
   }
-  if (!is.null(min_size)) {
-    cmd <- paste(cmd, "--min-size", min_size)
-  }
-  if (!is.null(tag_ids)) {
-    if (length(tag_ids) > 1) {
-      tag_ids <- paste(tag_ids, collapse = ", ")
-    }
-    cmd <- paste(cmd, "--tags", tag_ids)
-  }
-  if (!is.null(search)) {
-    cmd <- paste(cmd, "--search", search)
-  }
-  if (!is.null(mine)) {
-    cmd <- paste(cmd, "--mine")
-  }
-  if (!is.null(user)) {
-    cmd <- paste(cmd, "--user", user)
-  }
-
+  cmd <- paste("kaggle datasets list",
+               "--sort-by", match.arg(sort_by),
+               "--file-type", match.arg(file_type),
+               "--license", match.arg(license_name))
+  cmd <- add_tags(cmd, tag_ids)
+  cmd <- add_search(cmd, search)
+  cmd <- add_mine(cmd, mine)
+  cmd <- add_user(cmd, user)
+  cmd <- add_page(cmd, page)
+  cmd <- add_max_size(cmd, max_size)
+  cmd <- add_min_size(cmd, min_size)
   return(kaggle_command_to_df(cmd))
 }
 
@@ -89,22 +78,11 @@ kaggle_datasets_files <- function(dataset) {
 #' @export
 kaggle_datasets_download <- function(dataset, file_name = NULL, path = NULL, unzip = FALSE, force = FALSE, quiet = FALSE) {
   cmd <- paste("kaggle datasets download", dataset)
-  if (!is.null(file_name)) {
-    cmd <- paste(cmd, "--file", file_name)
-  }
-  if (!is.null(path)) {
-    cmd <- paste(cmd, "--path", path)
-  }
-  if (isTRUE(unzip)) {
-    cmd <- paste(cmd, "--unzip")
-  }
-  if (isTRUE(force)) {
-    cmd <- paste(cmd, "--force")
-  }
-  if (isTRUE(quiet)) {
-    cmd <- paste(cmd, "--quiet")
-  }
-
+  cmd <- add_file_name(cmd, file_name)
+  cmd <- add_path(cmd, path)
+  cmd <- add_unzip(cmd, unzip)
+  cmd <- add_force(cmd, force)
+  cmd <- add_quiet(cmd, quiet)
   return(kaggle_build_script(cmd))
 }
 
@@ -119,7 +97,8 @@ kaggle_datasets_download <- function(dataset, file_name = NULL, path = NULL, unz
 #'
 #' @export
 kaggle_datasets_init <- function(folder) {
-  cmd <- paste("kaggle datasets init --path", folder)
+  cmd <- paste("kaggle datasets init",
+               "--path", folder)
 }
 
 
@@ -131,7 +110,7 @@ kaggle_datasets_init <- function(folder) {
 #' @param public Create publicly (default is private)
 #' @param keep_tabular Do not convert tabular files to CSV (default is to convert)
 #' @param quiet Suppress printing information about the upload/download progress
-#' @param dir_mode What to do with directories: "skip" - ignore; "zip" - compressed upload; "tar" - uncompressed upload
+#' @param dir_mode What to do with directories (default is "skip"): "skip" - ignore; "zip" - compressed upload; "tar" - uncompressed upload
 #'
 #'
 #' @examples
@@ -139,18 +118,13 @@ kaggle_datasets_init <- function(folder) {
 #'
 #'
 #' @export
-kaggle_datasets_create <- function(folder, public = FALSE, keep_tabular = FALSE, dir_mode = c("skip", "zip", "tar"), quiet = FALSE) {
-  dir_mode <- match.arg(dir_mode)
-  cmd <- paste("kaggle datasets create --path", folder, "--dir-mode", dir_mode)
-  if (isTRUE(public)) {
-    cmd <- paste(cmd, "--public")
-  }
-  if (isTRUE(keep_tabular)) {
-    cmd <- paste(cmd, "--keep-tabular")
-  }
-  if (isTRUE(quiet)) {
-    cmd <- paste(cmd, "--quiet")
-  }
+kaggle_datasets_create <- function(folder, dir_mode = c("skip", "zip", "tar"), public = FALSE, keep_tabular = FALSE, quiet = FALSE) {
+  cmd <- paste("kaggle datasets create",
+               "--path", folder,
+               "--dir-mode", match.arg(dir_mode))
+  cmd <- add_public(cmd, public)
+  cmd <- add_keep_tabular(cmd, keep_tabular)
+  cmd <- add_quiet(cmd, quiet)
   return(kaggle_build_script(cmd))
 }
 
@@ -170,18 +144,14 @@ kaggle_datasets_create <- function(folder, public = FALSE, keep_tabular = FALSE,
 #'
 #'
 #' @export
-kaggle_datasets_version <- function(folder, version_notes, keep_tabular = FALSE, dir_mode = c("skip", "zip", "tar"), delete_old_versions = FALSE, quiet = FALSE) {
-  dir_mode <- match.arg(dir_mode)
-  cmd <- paste("kaggle datasets version --path", folder, "--message", version_notes)
-  if (isTRUE(keep_tabular)) {
-    cmd <- paste(cmd, "--keep-tabular")
-  }
-  if (isTRUE(delete_old_versions)) {
-    cmd <- paste(cmd, "--delete-old-versions")
-  }
-  if (isTRUE(quiet)) {
-    cmd <- paste(cmd, "--quiet")
-  }
+kaggle_datasets_version <- function(folder, version_notes, dir_mode = c("skip", "zip", "tar"), keep_tabular = FALSE,  delete_old_versions = FALSE, quiet = FALSE) {
+  cmd <- paste("kaggle datasets version",
+               "--path", folder,
+               "--message", version_notes,
+               "--dir-mode", match.arg(dir_mode))
+  cmd <- add_keep_tabular(cmd, keep_tabular)
+  cmd <- add_delete_old_versions(cmd, delete_old_versions)
+  cmd <- add_quiet(cmd, quiet)
   return(kaggle_build_script(cmd))
 }
 
@@ -190,18 +160,17 @@ kaggle_datasets_version <- function(folder, version_notes, keep_tabular = FALSE,
 #'
 #' @param dataset Dataset URL suffix in format <owner>/<dataset-name> (use `kaggle_datasets_list()`to show options)
 #' @param path Location to download dataset metadata to. Defaults to current working directory
-#'
+#' @param update A flag to indicate whether the dataset metadata should be updated.
 #'
 #' @examples
 #' kaggle_datasets_metadata(dataset = "zillow/zecon", path = "./path/to/download")
 #'
 #'
 #' @export
-kaggle_datasets_metadata <- function(dataset, path = NULL) {
+kaggle_datasets_metadata <- function(dataset, path = NULL, update = FALSE) {
   cmd <- paste("kaggle datasets metadata", dataset)
-  if (!is.null(path)) {
-    cmd <- paste(cmd, "--path", path)
-  }
+  cmd <- add_path(cmd, path)
+  cmd <- add_update(cmd, update)
   return(kaggle_build_script(cmd))
 }
 

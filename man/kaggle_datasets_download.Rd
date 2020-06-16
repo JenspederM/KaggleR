@@ -32,4 +32,6 @@ Please note that BigQuery datasets cannot be downloaded.
 \examples{
 kaggle_datasets_download("zillow/zecon")
 kaggle_datasets_download("zillow/zecon", file_name = "State_time_series.csv")
+
+
 }

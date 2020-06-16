@@ -19,4 +19,6 @@ Valid values depending on name
 }
 \examples{
 kaggle_config_set(name = "competition", value = "titanic")
+
+
 }

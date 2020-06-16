@@ -12,8 +12,9 @@ kaggle_datasets_list(
   min_size = NULL,
   tag_ids = NULL,
   search = NULL,
-  mine = NULL,
-  user = NULL
+  user = NULL,
+  mine = FALSE,
+  page = NULL
 )
 }
 \arguments{
@@ -31,9 +32,11 @@ kaggle_datasets_list(
 
 \item{search}{Term(s) to search for}
 
+\item{user}{Find public datasets owned by a specific user or organization}
+
 \item{mine}{Display only my items}
 
-\item{user}{Find public datasets owned by a specific user or organization}
+\item{page}{Page number for results paging. Page size is 20 by default}
 }
 \description{
 List Datasets
@@ -41,4 +44,6 @@ List Datasets
 \examples{
 kaggle_datasets_list(search = "demographies")
 kaggle_datasets_list(sort_by = "votes")
+
+
 }

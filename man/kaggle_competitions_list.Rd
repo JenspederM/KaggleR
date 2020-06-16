@@ -31,4 +31,6 @@ List Competitions
 \examples{
 kaggle_competitions_list(category = "gettingStarted")
 kaggle_competitions_list(search = "health")
+
+
 }
