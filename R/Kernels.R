@@ -1,11 +1,12 @@
 
 #' List Kernels
 #'
+#' @param mine Display only my items
+#' @param page Page number for results paging.
 #' @param search Term(s) to search for
 #' @param parent Find children of the specified parent kernel
 #' @param competition Find kernels for a given competition
-#' @param dataset Find kernels for a given dataset
-#' @param mine Display only my items
+#' @param dataset Find kernels for a given dataset slug. Format is {username/dataset-slug}
 #' @param size Number of kernels to list. Default size is 20, max is 100
 #' @param user Find kernels created by a given user
 #' @param language Specify the language the kernel is written in. Default is 'all'. Valid options are 'all', 'python', 'r', 'sqlite', and 'julia'
@@ -20,41 +21,26 @@
 #'
 #'
 #' @export
-kaggle_kernels_list <- function(mine = FALSE, size = 20, search = NULL, parent = NULL,
+kaggle_kernels_list <- function(mine = FALSE, page = NULL, size = 20, search = NULL, parent = FALSE,
                                 competition = NULL, dataset = NULL, user = NULL,
                                 language = c("all", "python", "r", "sqlite", "julia"),
                                 kernel_type = c("all", "script", "notebook"),
                                 output_type = c("all", "visualizations", "data"),
                                 sort_by = c('hotness', 'commentCount', 'dateCreated', 'dateRun', 'relevance', 'scoreAscending', 'scoreDescending', 'viewCount', 'voteCount')) {
-  language <- match.arg(language)
-  kernel_type <- match.arg(kernel_type)
-  output_type <- match.arg(output_type)
-  sort_by <- match.arg(sort_by)
+  stopifnot(size <= 100 && size > 0)
   cmd <- paste("kaggle kernels list",
-               "--language", language,
-               "--kernel-type", kernel_type,
-               "--output-type", output_type,
-               "--sort-by", sort_by,
+               "--language", match.arg(language),
+               "--kernel-type", match.arg(kernel_type),
+               "--output-type", match.arg(output_type),
+               "--sort-by", match.arg(sort_by),
                "--page-size", size)
-  if (isTRUE(mine)) {
-    cmd <- paste(cmd, "--mine")
-  }
-  if (!is.null(search)) {
-    cmd <- paste(cmd, "--search", search)
-  }
-  if (!is.null(parent)) {
-    cmd <- paste(cmd, "--parent", parent)
-  }
-  if (!is.null(competition)) {
-    cmd <- paste(cmd, "--competition", competition)
-  }
-  if (!is.null(dataset)) {
-    cmd <- paste(cmd, "--dataset", dataset)
-  }
-  if (!is.null(user)) {
-    cmd <- paste(cmd, "--user", user)
-  }
-
+  cmd <- add_mine(cmd, mine)
+  cmd <- add_page(cmd, page)
+  cmd <- add_search(cmd, search)
+  cmd <- add_parent(cmd, parent)
+  cmd <- add_competition(cmd, competition)
+  cmd <- add_dataset(cmd, dataset)
+  cmd <- add_user(cmd, user)
   return(kaggle_command_to_df(cmd))
 }
 
@@ -70,7 +56,8 @@ kaggle_kernels_list <- function(mine = FALSE, size = 20, search = NULL, parent =
 #'
 #' @export
 kaggle_kernels_init <- function(folder) {
-  cmd <- paste("kaggle kernels init --path", folder)
+  cmd <- paste("kaggle kernels init",
+               "--path", folder)
   return(kaggle_build_script(cmd))
 }
 
@@ -85,7 +72,8 @@ kaggle_kernels_init <- function(folder) {
 #'
 #' @export
 kaggle_kernels_push <- function(folder) {
-  cmd <- paste("kaggle kernels push --path", folder)
+  cmd <- paste("kaggle kernels push",
+               "--path", folder)
   return(kaggle_build_script(cmd))
 }
 
@@ -104,12 +92,8 @@ kaggle_kernels_push <- function(folder) {
 #' @export
 kaggle_kernels_pull <- function(kernel, path = NULL, metadata = FALSE) {
   cmd <- paste("kaggle kernels pull", kernel)
-  if (!is.null(path)) {
-    cmd <- paste(cmd, "--path", path)
-  }
-  if (isTRUE(metadata)) {
-    cmd <- paste(cmd, "--metadata")
-  }
+  cmd <- add_path(cmd, path)
+  cmd <- add_metadata(cmd, metadata)
   return(kaggle_build_script(cmd))
 }
 
@@ -129,15 +113,9 @@ kaggle_kernels_pull <- function(kernel, path = NULL, metadata = FALSE) {
 #' @export
 kaggle_kernels_output <- function(kernel, path = NULL, force = FALSE, quiet = FALSE) {
   cmd <- paste("kaggle kernels output", kernel)
-  if (!is.null(path)) {
-    cmd <- paste(cmd, "--path", path)
-  }
-  if (isTRUE(force)) {
-    cmd <- paste(cmd, "--force")
-  }
-  if (isTRUE(quiet)) {
-    cmd <- paste(cmd, "--quiet")
-  }
+  cmd <- add_path(cmd, path)
+  cmd <- add_force(cmd, force)
+  cmd <- add_quiet(cmd, quiet)
   return(kaggle_build_script(cmd))
 }
 

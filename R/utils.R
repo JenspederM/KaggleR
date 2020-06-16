@@ -98,6 +98,8 @@ add_path <- kaggle_build_add_argument(argument = "--path", type = "isnull")
 add_search <- kaggle_build_add_argument(argument = "--search", type = "isnull")
 add_sort_by <- kaggle_build_add_argument(argument = "--sort-by", type = "isnull")
 add_page <- kaggle_build_add_argument(argument = "--page", type = "isnull")
+add_mine <- kaggle_build_add_argument(argument = "--mine", type = "istrue")
+add_user <- kaggle_build_add_argument(argument = "--user", type = "isnull")
 
 # Create/Version
 add_keep_tabular <- kaggle_build_add_argument(argument = "--keep-tabular", type = "istrue")
@@ -107,7 +109,6 @@ add_keep_tabular <- kaggle_build_add_argument(argument = "--keep-tabular", type 
 # >> Competitions List ----------------------------------------------------
 add_group <- kaggle_build_add_argument(argument = "--group", type = "isnull")
 add_category <- kaggle_build_add_argument(argument = "--category", type = "isnull")
-
 
 # >> Competitions Leaderboard ---------------------------------------------
 add_show <- kaggle_build_add_argument(argument = "--show", type = "istrue")
@@ -121,19 +122,26 @@ add_max_size <- kaggle_build_add_argument(argument = "--max-size", type = "isnul
 add_min_size <- kaggle_build_add_argument(argument = "--min-size", type = "isnull")
 add_file_type <- kaggle_build_add_argument(argument = "--file-type", type = "isnull")
 add_tags <- kaggle_build_add_argument(argument = "--tags", type = "isnull")
-add_mine <- kaggle_build_add_argument(argument = "--mine", type = "istrue")
-add_user <- kaggle_build_add_argument(argument = "--user", type = "isnull")
-
 
 # >> Datasets Download ----------------------------------------------------
 add_unzip <- kaggle_build_add_argument(argument = "--unzip", type = "istrue")
 
-
 # >> Datasets Create ------------------------------------------------------
 add_public <- kaggle_build_add_argument(argument = "--public", type = "istrue")
-
 
 # >> Datasets Version -----------------------------------------------------
 add_delete_old_versions <- kaggle_build_add_argument(argument = "--delete-old-versions", type = "istrue")
 add_update <- kaggle_build_add_argument(argument = "--update", type = "istrue")
+
+
+# > Kernels ---------------------------------------------------------------
+
+# >> Kernels List ---------------------------------------------------------
+add_page_size <- kaggle_build_add_argument(argument = "--page-size", type = "isnull")
+add_parent <- kaggle_build_add_argument(argument = "--parent", type = "istrue")
+add_competition <- kaggle_build_add_argument(argument = "--competition", type = "isnull")
+add_dataset <- kaggle_build_add_argument(argument = "--dataset", type = "isnull")
+
+# >> Kernels Pull ---------------------------------------------------------
+add_metadata <- kaggle_build_add_argument(argument = "--metadata", type = "istrue")
 
