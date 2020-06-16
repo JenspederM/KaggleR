@@ -18,7 +18,7 @@ kaggle_config_view <- function() {
 #' - path: Folder where file(s) will be downloaded, defaults to current working directory
 #' - proxy: Proxy for HTTP requests
 #'
-#' @param name Name of the configuration parameter (one of competition, path, proxy)
+#' @param name Name of the configuration parameter One of competition, path, or proxy
 #' @param value Value of the configuration parameter
 #'
 #'
@@ -28,14 +28,15 @@ kaggle_config_view <- function() {
 #'
 #' @export
 kaggle_config_set <- function(name, value) {
-  name <- match.arg(name, choices = c("competition", "path", "proxy"))
-  cmd <- paste("kaggle config set --name", name, "--value", value)
+  cmd <- paste("kaggle config set",
+               "--name", match.arg(name, choices = c("competition", "path", "proxy")),
+               "--value", value)
   return(kaggle_build_script(cmd))
 }
 
 #' Clear a configuration value
 #'
-#' @param name Name of the configuration parameter
+#' @param name Name of the configuration parameter. One of competition, path, or proxy
 #'
 #'
 #' @examples
@@ -44,7 +45,7 @@ kaggle_config_set <- function(name, value) {
 #'
 #' @export
 kaggle_config_unset <- function(name) {
-  name <- match.arg(name, choices = c("competition", "path", "proxy"))
-  cmd <- paste("kaggle config unset --name", name)
+  cmd <- paste("kaggle config unset",
+               "--name", match.arg(name, choices = c("competition", "path", "proxy")))
   return(kaggle_build_script(cmd))
 }
