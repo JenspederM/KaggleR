@@ -28,7 +28,7 @@ kaggle_kernels_list <- function(mine = FALSE, page = NULL, size = 20, search = N
                                 output_type = c("all", "visualizations", "data"),
                                 sort_by = c('hotness', 'commentCount', 'dateCreated', 'dateRun', 'relevance', 'scoreAscending', 'scoreDescending', 'viewCount', 'voteCount')) {
   stopifnot(size <= 100 && size > 0)
-  cmd <- paste("kaggle kernels list",
+  cmd <- paste("kernels list",
                "--language", match.arg(language),
                "--kernel-type", match.arg(kernel_type),
                "--output-type", match.arg(output_type),
@@ -56,7 +56,7 @@ kaggle_kernels_list <- function(mine = FALSE, page = NULL, size = 20, search = N
 #'
 #' @export
 kaggle_kernels_init <- function(folder) {
-  cmd <- paste("kaggle kernels init",
+  cmd <- paste("kernels init",
                "--path", folder)
   return(kaggle_build_script(cmd))
 }
@@ -72,7 +72,7 @@ kaggle_kernels_init <- function(folder) {
 #'
 #' @export
 kaggle_kernels_push <- function(folder) {
-  cmd <- paste("kaggle kernels push",
+  cmd <- paste("kernels push",
                "--path", folder)
   return(kaggle_build_script(cmd))
 }
@@ -91,7 +91,7 @@ kaggle_kernels_push <- function(folder) {
 #'
 #' @export
 kaggle_kernels_pull <- function(kernel, path = NULL, metadata = FALSE) {
-  cmd <- paste("kaggle kernels pull", kernel)
+  cmd <- paste("kernels pull", kernel)
   cmd <- add_path(cmd, path)
   cmd <- add_metadata(cmd, metadata)
   return(kaggle_build_script(cmd))
@@ -112,7 +112,7 @@ kaggle_kernels_pull <- function(kernel, path = NULL, metadata = FALSE) {
 #'
 #' @export
 kaggle_kernels_output <- function(kernel, path = NULL, force = FALSE, quiet = FALSE) {
-  cmd <- paste("kaggle kernels output", kernel)
+  cmd <- paste("kernels output", kernel)
   cmd <- add_path(cmd, path)
   cmd <- add_force(cmd, force)
   cmd <- add_quiet(cmd, quiet)
@@ -131,7 +131,7 @@ kaggle_kernels_output <- function(kernel, path = NULL, force = FALSE, quiet = FA
 #'
 #' @export
 kaggle_kernels_status <- function(kernel) {
-  cmd <- paste("kaggle kernels output", kernel)
+  cmd <- paste("kernels output", kernel)
   return(kaggle_build_script(cmd))
 }
 

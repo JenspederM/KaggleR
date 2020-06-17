@@ -18,7 +18,7 @@ kaggle_competitions_list <- function(group = c('general', 'entered', 'inClass'),
                                      category = c('all', 'featured', 'research', 'recruitment', 'gettingStarted', 'masters', 'playground'),
                                      sort_by = c('latestDeadline','grouped', 'prize', 'earliestDeadline',  'numberOfTeams', 'recentlyCreated'),
                                      search = NULL) {
-  cmd <- paste("kaggle competitions list",
+  cmd <- paste("competitions list",
                "--group", match.arg(group),
                "--category", match.arg(category),
                "--sort-by", match.arg(sort_by))
@@ -40,7 +40,7 @@ kaggle_competitions_list <- function(group = c('general', 'entered', 'inClass'),
 #'
 #' @export
 kaggle_competitions_files <- function(competition, quiet = FALSE) {
-  cmd <- paste("kaggle competitions files", competition)
+  cmd <- paste("competitions files", competition)
   cmd <- add_quiet(cmd, quiet)
   return(kaggle_command_to_df(cmd))
 }
@@ -65,7 +65,7 @@ kaggle_competitions_files <- function(competition, quiet = FALSE) {
 #'
 #' @export
 kaggle_competitions_download_files <- function(competition, file_name = NULL, path = NULL, force = FALSE, quiet = FALSE) {
-  cmd <- paste("kaggle competitions download", competition)
+  cmd <- paste("competitions download", competition)
   cmd <- add_file_name(cmd, file_name)
   cmd <- add_path(cmd, path)
   cmd <- add_force(cmd, force)
@@ -91,7 +91,7 @@ kaggle_competitions_download_files <- function(competition, file_name = NULL, pa
 #'
 #' @export
 kaggle_competitions_submit <- function(file_name, message, competition = NULL, quiet = FALSE) {
-  cmd <- paste("kaggle competitions submit",
+  cmd <- paste("competitions submit",
                "--file", file_name,
                "--message", message)
   cmd <- add_quiet(cmd, quiet)
@@ -112,7 +112,7 @@ kaggle_competitions_submit <- function(file_name, message, competition = NULL, q
 #'
 #' @export
 kaggle_competitions_submissions <- function(competition, quiet = FALSE) {
-  cmd <- paste("kaggle competitions submissions", competition)
+  cmd <- paste("competitions submissions", competition)
   cmd <- add_quiet(cmd, quiet)
   return(kaggle_command_to_df(cmd))
 }
@@ -138,7 +138,7 @@ kaggle_competitions_submissions <- function(competition, quiet = FALSE) {
 #'
 #' @export
 kaggle_competitions_leaderboard <- function(competition, show = TRUE, download = FALSE, path = NULL, quiet = FALSE) {
-  cmd <- paste("kaggle competitions leaderboard", competition)
+  cmd <- paste("competitions leaderboard", competition)
   cmd <- add_show(cmd, show)
   cmd <- add_download(cmd, download)
   cmd <- add_path(cmd, path)

@@ -27,7 +27,7 @@ kaggle_datasets_list <- function(sort_by = c('hottest', 'votes', 'updated', 'act
   if (length(tag_ids) > 1) {
     tag_ids <- paste(tag_ids, collapse = ", ")
   }
-  cmd <- paste("kaggle datasets list",
+  cmd <- paste("datasets list",
                "--sort-by", match.arg(sort_by),
                "--file-type", match.arg(file_type),
                "--license", match.arg(license_name))
@@ -53,7 +53,7 @@ kaggle_datasets_list <- function(sort_by = c('hottest', 'votes', 'updated', 'act
 #'
 #' @export
 kaggle_datasets_files <- function(dataset) {
-  cmd <- paste("kaggle datasets files", dataset)
+  cmd <- paste("datasets files", dataset)
   return(kaggle_command_to_df(cmd))
 }
 
@@ -77,7 +77,7 @@ kaggle_datasets_files <- function(dataset) {
 #'
 #' @export
 kaggle_datasets_download <- function(dataset, file_name = NULL, path = NULL, unzip = FALSE, force = FALSE, quiet = FALSE) {
-  cmd <- paste("kaggle datasets download", dataset)
+  cmd <- paste("datasets download", dataset)
   cmd <- add_file_name(cmd, file_name)
   cmd <- add_path(cmd, path)
   cmd <- add_unzip(cmd, unzip)
@@ -97,7 +97,7 @@ kaggle_datasets_download <- function(dataset, file_name = NULL, path = NULL, unz
 #'
 #' @export
 kaggle_datasets_init <- function(folder) {
-  cmd <- paste("kaggle datasets init",
+  cmd <- paste("datasets init",
                "--path", folder)
 }
 
@@ -119,7 +119,7 @@ kaggle_datasets_init <- function(folder) {
 #'
 #' @export
 kaggle_datasets_create <- function(folder, dir_mode = c("skip", "zip", "tar"), public = FALSE, keep_tabular = FALSE, quiet = FALSE) {
-  cmd <- paste("kaggle datasets create",
+  cmd <- paste("datasets create",
                "--path", folder,
                "--dir-mode", match.arg(dir_mode))
   cmd <- add_public(cmd, public)
@@ -145,7 +145,7 @@ kaggle_datasets_create <- function(folder, dir_mode = c("skip", "zip", "tar"), p
 #'
 #' @export
 kaggle_datasets_version <- function(folder, version_notes, dir_mode = c("skip", "zip", "tar"), keep_tabular = FALSE,  delete_old_versions = FALSE, quiet = FALSE) {
-  cmd <- paste("kaggle datasets version",
+  cmd <- paste("datasets version",
                "--path", folder,
                "--message", version_notes,
                "--dir-mode", match.arg(dir_mode))
@@ -168,7 +168,7 @@ kaggle_datasets_version <- function(folder, version_notes, dir_mode = c("skip", 
 #'
 #' @export
 kaggle_datasets_metadata <- function(dataset, path = NULL, update = FALSE) {
-  cmd <- paste("kaggle datasets metadata", dataset)
+  cmd <- paste("datasets metadata", dataset)
   cmd <- add_path(cmd, path)
   cmd <- add_update(cmd, update)
   return(kaggle_build_script(cmd))
@@ -185,6 +185,6 @@ kaggle_datasets_metadata <- function(dataset, path = NULL, update = FALSE) {
 #'
 #' @export
 kaggle_datasets_status <- function(dataset) {
-  cmd <- paste("kaggle datasets status", dataset)
+  cmd <- paste("datasets status", dataset)
   return(kaggle_build_script(cmd))
 }

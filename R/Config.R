@@ -7,7 +7,7 @@
 #'
 #' @export
 kaggle_config_view <- function() {
-  cmd <- "kaggle config view"
+  cmd <- "config view"
   return(kaggle_get_config(cmd))
 }
 
@@ -28,7 +28,7 @@ kaggle_config_view <- function() {
 #'
 #' @export
 kaggle_config_set <- function(name, value) {
-  cmd <- paste("kaggle config set",
+  cmd <- paste("config set",
                "--name", match.arg(name, choices = c("competition", "path", "proxy")),
                "--value", value)
   return(kaggle_build_script(cmd))
@@ -45,7 +45,7 @@ kaggle_config_set <- function(name, value) {
 #'
 #' @export
 kaggle_config_unset <- function(name) {
-  cmd <- paste("kaggle config unset",
+  cmd <- paste("config unset",
                "--name", match.arg(name, choices = c("competition", "path", "proxy")))
   return(kaggle_build_script(cmd))
 }
