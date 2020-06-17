@@ -5,7 +5,7 @@ kaggle_build_script <- function(command, verbose = TRUE) {
   if (isTRUE(verbose)) {
     cat("Executing command: ", command, "\n\n")
   }
-  tmp <- tempfile()
+  tmp <- tempfile(fileext = ".sh")
   write(file = tmp,
         x = paste("#!/bin/bash",
                   "export PATH='~/.local/bin:$PATH'",
@@ -16,7 +16,7 @@ kaggle_build_script <- function(command, verbose = TRUE) {
     system(paste0("chmod +x ", tmp))
     system(tmp)
   } else if (os == "windows") {
-    shell(paste0("chmod +x ", tmp))
+    #shell(paste0("chmod +x ", tmp))
     shell(tmp)
   } else {
     stop("Unable to determine OS")
