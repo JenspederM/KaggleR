@@ -1,23 +1,25 @@
 
 # Build Script ------------------------------------------------------------
 kaggle_build_script <- function(command, verbose = TRUE) {
-  on.exit(unlink(tmp))
   if (isTRUE(verbose)) {
-    cat("Executing command: ", command, "\n\n")
+    cat("Executing command: kaggle", command, "\n\n")
   }
-  tmp <- tempfile(fileext = ".sh")
-  write(file = tmp,
-        x = paste("#!/bin/bash",
-                  "export PATH='~/.local/bin:$PATH'",
-                  "source ~/.bashrc",
-                  command, sep = "\n"))
-  os <- .Platform$OS.type
-  if (os == "unix") {
-    system(paste0("chmod +x ", tmp))
-    system(tmp)
-  } else if (os == "windows") {
-    #shell(paste0("chmod +x ", tmp))
-    shell(tmp)
+
+  if (.Platform$OS.type == "unix") {
+    tmp <- tempfile(fileext = ".sh")
+    on.exit(unlink(tmp))
+
+    write(file = tmp,
+          x = paste("#!/bin/bash",
+                    "export PATH='~/.local/bin:$PATH'",
+                    "source ~/.bashrc",
+                    paste("kaggle", command),
+                    sep = "\n"))
+
+    system2("chmod", paste("+x", tmp))
+    system2(tmp)
+  } else if (.Platform$OS.type == "windows") {
+    system2("kaggle", command)
   } else {
     stop("Unable to determine OS")
   }
@@ -28,12 +30,22 @@ kaggle_build_script <- function(command, verbose = TRUE) {
 
 # Redirect output to csv and read as data.frame ---------------------------
 kaggle_command_to_df <- function(command, verbose = TRUE) {
-  on.exit(unlink(tmp))
-  if (isTRUE(verbose)) {
-    cat("Executing command: ", command, "\n\n")
-  }
+  if (isTRUE(verbose)) cat("Executing command: kaggle", command, "\n\n")
+
+  # Initiate temporary file
   tmp <- tempfile(fileext = ".csv")
-  kaggle_build_script(paste(command, "--csv", "&>", tmp), verbose = FALSE)
+  on.exit(unlink(tmp))
+
+  # Execute command
+  if (.Platform$OS.type == "unix") {
+    kaggle_build_script(paste(command, "--csv", "&>", tmp), verbose = FALSE)
+  } else if (.Platform$OS.type == "windows") {
+    system2("kaggle", paste(command, "--csv"), stdout = tmp)
+  } else {
+    stop("Unable to determine OS")
+  }
+
+  # Return Data.Frame
   return(utils::read.csv(tmp))
 }
 
