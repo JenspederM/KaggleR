@@ -14,7 +14,7 @@ For each category, all the corresponding commands from the Kaggle API has been a
 
 ## Installation
 
-For the `KaggleR` pacakge to work, the official [Kaggle API](https://github.com/Kaggle/kaggle-api) must be installed. Furthermore, authentication is required to interact with the Kaggle platform. Here, I have copied (and slightly modified) the relevant section from Kaggle's documentation.
+For the `KaggleR` pacakge to work, the official [Kaggle API](https://github.com/Kaggle/kaggle-api) must be installed. Furthermore, authentication is required to interact with the Kaggle platform. Here, I have copied (and slightly modified) the relevant sections from Kaggle's documentation.
 
 ### Installing the official Kaggle API
 
@@ -38,7 +38,7 @@ For your security, ensure that other users of your computer do not have read acc
 
 You can also choose to export your Kaggle username and token to the environment:
 
-```
+```bash
 export KAGGLE_USERNAME=datadinosaur
 export KAGGLE_KEY=xxxxxxxxxxxxxx
 ```

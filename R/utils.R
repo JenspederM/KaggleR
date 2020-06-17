@@ -11,8 +11,17 @@ kaggle_build_script <- function(command, verbose = TRUE) {
                   "export PATH='~/.local/bin:$PATH'",
                   "source ~/.bashrc",
                   command, sep = "\n"))
-  system(paste0("chmod +x ", tmp))
-  system(tmp)
+  os <- .Platform$OS.type
+  if (os == "unix") {
+    system(paste0("chmod +x ", tmp))
+    system(tmp)
+  } else if (os == "windows") {
+    shell(paste0("chmod +x ", tmp))
+    shell(tmp)
+  } else {
+    stop("Unable to determine OS")
+  }
+
   return(invisible(NULL))
 }
 
