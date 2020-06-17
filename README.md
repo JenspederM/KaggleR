@@ -14,13 +14,6 @@ For each category, all the corresponding commands from the Kaggle API has been a
 
 ## Installation
 
-To install the package use:
-```
-devtools::install_github("JensPederM/KaggleR")
-```
-
-## Prerequisites
-
 For the `KaggleR` pacakge to work, the official [Kaggle API](https://github.com/Kaggle/kaggle-api) must be installed. Furthermore, authentication is required to interact with the Kaggle platform. Here, I have copied (and slightly modified) the relevant section from Kaggle's documentation.
 
 ### Installing the official Kaggle API
@@ -52,3 +45,10 @@ export KAGGLE_KEY=xxxxxxxxxxxxxx
 
 In addition, you can export any other configuration value that normally would be in the `$HOME/.kaggle/kaggle.json` in the format 'KAGGLE_' (note uppercase).
 For example, if the file had the variable "proxy" you would export `KAGGLE_PROXY` and it would be discovered by the client.
+
+### Installing the `KaggleR` Package
+
+To install the `KaggleR` package use:
+```
+devtools::install_github("JensPederM/KaggleR")
+```
