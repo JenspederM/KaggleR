@@ -1,9 +1,7 @@
 
 # Build Script ------------------------------------------------------------
 kaggle_build_script <- function(command, verbose = TRUE) {
-  if (isTRUE(verbose)) {
-    cat("Executing command: kaggle", command, "\n\n")
-  }
+  if (isTRUE(verbose)) cat("Executing command: kaggle", command, "\n\n")
 
   if (.Platform$OS.type == "unix") {
     system2("kaggle", command, env = "PATH=~/.local/bin:$PATH")
