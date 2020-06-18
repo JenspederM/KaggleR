@@ -6,18 +6,7 @@ kaggle_build_script <- function(command, verbose = TRUE) {
   }
 
   if (.Platform$OS.type == "unix") {
-    tmp <- tempfile(fileext = ".sh")
-    on.exit(unlink(tmp))
-
-    write(file = tmp,
-          x = paste("#!/bin/bash",
-                    "export PATH='~/.local/bin:$PATH'",
-                    "source ~/.bashrc",
-                    paste("kaggle", command),
-                    sep = "\n"))
-
-    system2("chmod", paste("+x", tmp))
-    system2(tmp)
+    system2("kaggle", command, env = "PATH=~/.local/bin:$PATH")
   } else if (.Platform$OS.type == "windows") {
     system2("kaggle", command)
   } else {
