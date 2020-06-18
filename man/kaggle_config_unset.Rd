@@ -7,7 +7,7 @@
 kaggle_config_unset(name)
 }
 \arguments{
-\item{name}{Name of the configuration parameter}
+\item{name}{Name of the configuration parameter. One of competition, path, or proxy}
 }
 \description{
 Clear a configuration value

@@ -6,9 +6,10 @@
 \usage{
 kaggle_kernels_list(
   mine = FALSE,
+  page = NULL,
   size = 20,
   search = NULL,
-  parent = NULL,
+  parent = FALSE,
   competition = NULL,
   dataset = NULL,
   user = NULL,
@@ -22,6 +23,8 @@ kaggle_kernels_list(
 \arguments{
 \item{mine}{Display only my items}
 
+\item{page}{Page number for results paging.}
+
 \item{size}{Number of kernels to list. Default size is 20, max is 100}
 
 \item{search}{Term(s) to search for}
@@ -30,7 +33,7 @@ kaggle_kernels_list(
 
 \item{competition}{Find kernels for a given competition}
 
-\item{dataset}{Find kernels for a given dataset}
+\item{dataset}{Find kernels for a given dataset slug. Format is {username/dataset-slug}}
 
 \item{user}{Find kernels created by a given user}
 

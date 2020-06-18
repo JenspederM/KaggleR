@@ -7,7 +7,7 @@
 kaggle_config_set(name, value)
 }
 \arguments{
-\item{name}{Name of the configuration parameter (one of competition, path, proxy)}
+\item{name}{Name of the configuration parameter One of competition, path, or proxy}
 
 \item{value}{Value of the configuration parameter}
 }

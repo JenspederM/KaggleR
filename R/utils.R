@@ -77,7 +77,7 @@ kaggle_build_add_argument <- function(argument = NULL, type = c("istrue", "isnul
     istrue = return(
       function(command, value = NULL) {
         if (isTRUE(value)) {
-          return(paste(command, argument, value))
+          return(paste(command, argument))
         } else {
           return(command)
         }
