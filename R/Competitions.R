@@ -21,9 +21,10 @@ kaggle_competitions_list <- function(group = c('general', 'entered', 'inClass'),
   cmd <- paste("competitions list",
                "--group", match.arg(group),
                "--category", match.arg(category),
-               "--sort-by", match.arg(sort_by))
+               "--sort-by", match.arg(sort_by),
+               "--csv")
   cmd <- add_search(cmd, search)
-  return(kaggle_command_to_df(cmd))
+  return(kaggle_build_script(cmd))
 }
 
 #' List Competition Files
@@ -40,9 +41,9 @@ kaggle_competitions_list <- function(group = c('general', 'entered', 'inClass'),
 #'
 #' @export
 kaggle_competitions_files <- function(competition, quiet = FALSE) {
-  cmd <- paste("competitions files", competition)
+  cmd <- paste("competitions files", competition, "--csv")
   cmd <- add_quiet(cmd, quiet)
-  return(kaggle_command_to_df(cmd))
+  return(kaggle_build_script(cmd))
 }
 
 
@@ -98,6 +99,7 @@ kaggle_competitions_submit <- function(file_name, message, competition = NULL, q
   return(kaggle_build_script(cmd))
 }
 
+
 #' List competition submissions
 #'
 #' Note: you will need to accept competition rules at https://www.kaggle.com/c/<competition-name>/rules.
@@ -112,10 +114,11 @@ kaggle_competitions_submit <- function(file_name, message, competition = NULL, q
 #'
 #' @export
 kaggle_competitions_submissions <- function(competition, quiet = FALSE) {
-  cmd <- paste("competitions submissions", competition)
+  cmd <- paste("competitions submissions", competition, "--csv")
   cmd <- add_quiet(cmd, quiet)
-  return(kaggle_command_to_df(cmd))
+  return(kaggle_build_script(cmd))
 }
+
 
 #' Get Competition Leaderboard
 #'
@@ -145,11 +148,12 @@ kaggle_competitions_leaderboard <- function(competition, show = TRUE, download =
   cmd <- add_quiet(cmd, quiet)
 
   if (isTRUE(show)) {
-    if (isTRUE(quiet)) {
-      return(kaggle_command_to_df(cmd))
+    cmd <- paste(cmd, "--csv")
+    if (isFALSE(download)) {
+      return(kaggle_build_script(cmd))
     } else {
       cmd <- add_quiet(cmd, TRUE)
-      return(kaggle_command_to_df(cmd))
+      return(kaggle_build_script(cmd))
     }
   } else {
     return(kaggle_build_script(cmd))

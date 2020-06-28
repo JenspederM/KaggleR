@@ -14,7 +14,6 @@
 #' @param output_type Search for specific kernel output types. Default is 'all'. Valid options are 'all', 'visualizations', and 'data'
 #' @param sort_by Sort list results. Default is 'hotness'.  Valid options are 'hotness', 'commentCount', 'dateCreated', 'dateRun', 'relevance', 'scoreAscending', 'scoreDescending', 'viewCount', and 'voteCount'. 'relevance' is only applicable if a search term is specified.
 #'
-#'
 #' @examples
 #' kaggle_kernels_list(search = "titanic")
 #' kaggle_kernels_list(language = "python")
@@ -33,7 +32,8 @@ kaggle_kernels_list <- function(mine = FALSE, page = NULL, size = 20, search = N
                "--kernel-type", match.arg(kernel_type),
                "--output-type", match.arg(output_type),
                "--sort-by", match.arg(sort_by),
-               "--page-size", size)
+               "--page-size", size,
+               "--csv")
   cmd <- add_mine(cmd, mine)
   cmd <- add_page(cmd, page)
   cmd <- add_search(cmd, search)
@@ -41,7 +41,7 @@ kaggle_kernels_list <- function(mine = FALSE, page = NULL, size = 20, search = N
   cmd <- add_competition(cmd, competition)
   cmd <- add_dataset(cmd, dataset)
   cmd <- add_user(cmd, user)
-  return(kaggle_command_to_df(cmd))
+  return(kaggle_build_script(cmd))
 }
 
 

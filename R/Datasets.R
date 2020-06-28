@@ -30,7 +30,8 @@ kaggle_datasets_list <- function(sort_by = c('hottest', 'votes', 'updated', 'act
   cmd <- paste("datasets list",
                "--sort-by", match.arg(sort_by),
                "--file-type", match.arg(file_type),
-               "--license", match.arg(license_name))
+               "--license", match.arg(license_name),
+               "--csv")
   cmd <- add_tags(cmd, tag_ids)
   cmd <- add_search(cmd, search)
   cmd <- add_mine(cmd, mine)
@@ -38,7 +39,7 @@ kaggle_datasets_list <- function(sort_by = c('hottest', 'votes', 'updated', 'act
   cmd <- add_page(cmd, page)
   cmd <- add_max_size(cmd, max_size)
   cmd <- add_min_size(cmd, min_size)
-  return(kaggle_command_to_df(cmd))
+  return(kaggle_build_script(cmd))
 }
 
 
@@ -53,8 +54,8 @@ kaggle_datasets_list <- function(sort_by = c('hottest', 'votes', 'updated', 'act
 #'
 #' @export
 kaggle_datasets_files <- function(dataset) {
-  cmd <- paste("datasets files", dataset)
-  return(kaggle_command_to_df(cmd))
+  cmd <- paste("datasets files", dataset, "--csv")
+  return(kaggle_build_script(cmd))
 }
 
 
@@ -71,8 +72,10 @@ kaggle_datasets_files <- function(dataset) {
 #'
 #'
 #' @examples
+#' \dontrun{
 #' kaggle_datasets_download("zillow/zecon")
 #' kaggle_datasets_download("zillow/zecon", file_name = "State_time_series.csv")
+#' }
 #'
 #'
 #' @export
@@ -85,6 +88,7 @@ kaggle_datasets_download <- function(dataset, file_name = NULL, path = NULL, unz
   cmd <- add_quiet(cmd, quiet)
   return(kaggle_build_script(cmd))
 }
+
 
 #' Initialize Metadata file for Dataset Creation
 #'
@@ -102,7 +106,6 @@ kaggle_datasets_init <- function(folder) {
 }
 
 
-
 #' Create a new dataset
 #'
 #'
@@ -114,7 +117,9 @@ kaggle_datasets_init <- function(folder) {
 #'
 #'
 #' @examples
+#' \dontrun{
 #' kaggle_datasets_create(folder = "./path/to/dataset")
+#' }
 #'
 #'
 #' @export
@@ -140,7 +145,9 @@ kaggle_datasets_create <- function(folder, dir_mode = c("skip", "zip", "tar"), p
 #'
 #'
 #' @examples
+#' \dontrun{
 #' kaggle_datasets_version(folder = "./path/to/dataset", version_notes = "Updated data")
+#' }
 #'
 #'
 #' @export
@@ -163,7 +170,9 @@ kaggle_datasets_version <- function(folder, version_notes, dir_mode = c("skip", 
 #' @param update A flag to indicate whether the dataset metadata should be updated.
 #'
 #' @examples
+#' \dontrun{
 #' kaggle_datasets_metadata(dataset = "zillow/zecon", path = "./path/to/download")
+#' }
 #'
 #'
 #' @export
@@ -173,6 +182,7 @@ kaggle_datasets_metadata <- function(dataset, path = NULL, update = FALSE) {
   cmd <- add_update(cmd, update)
   return(kaggle_build_script(cmd))
 }
+
 
 #' Get Dataset Creation Status
 #'
