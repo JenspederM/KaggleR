@@ -4,16 +4,21 @@ kaggle_build_script <- function(command, verbose = TRUE) {
   if (isTRUE(verbose)) cat("Executing command: kaggle", command, "\n\n")
 
   if (.Platform$OS.type == "unix") {
-    system2("kaggle", command, env = "PATH=~/.local/bin:$PATH")
+    path <- "PATH=~/.local/bin:$PATH"
   } else if (.Platform$OS.type == "windows") {
-    system2("kaggle", command)
+    path <- character()
   } else {
     stop("Unable to determine OS")
   }
 
+  if (grepl("--csv", command)) {
+    return(utils::read.csv(text = system2("kaggle", command, env = path, stdout = TRUE)))
+  } else {
+    return(system2("kaggle", command, env = path))
+  }
+
   return(invisible(NULL))
 }
-
 
 # Redirect output to csv and read as data.frame ---------------------------
 kaggle_command_to_df <- function(command, verbose = TRUE) {
@@ -50,7 +55,7 @@ kaggle_get_config <- function(command, verbose = TRUE) {
   output <- strsplit(output, ":")
   output_names <- lapply(output, function(x) trimws(x[[1]]))
   output_values <- lapply(output, function(x) trimws(x[[2]]))
-  output <- stats::setNames(output_values, output_names)
+  output <- stats::setNames(object = output_values, nm = output_names)
   return(output)
 }
 
