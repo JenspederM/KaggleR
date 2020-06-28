@@ -30,9 +30,9 @@ kaggle_get_config <- function(command, verbose = TRUE) {
   tmp <- gsub("-|:", "", tmp)
   tmp <- trimws(tmp)
   tmp <- strsplit(tmp, " ")
-  output_names <- vapply(tmp, `[[`, 1, FUN.VALUE = "")
-  output_values <- vapply(tmp, `[[`, 2, FUN.VALUE = "")
-  return(data.frame("config_name" = output_names, "config_value" = output_values))
+  config_name <- vapply(tmp, `[[`, 1, FUN.VALUE = "")
+  config_value <- vapply(tmp, `[[`, 2, FUN.VALUE = "")
+  return(data.frame(config_name, config_value))
 }
 
 
