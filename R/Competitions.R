@@ -155,8 +155,8 @@ kaggle_competitions_leaderboard <- function(competition, show = TRUE, download =
   cmd <- add_quiet(cmd, quiet)
 
   if (isTRUE(show)) {
-    cmd <- paste(cmd, "--csv")
     if (isFALSE(download)) {
+      cmd <- paste(cmd, "--csv")
       return(kaggle_build_script(cmd))
     } else {
       cmd <- add_quiet(cmd, TRUE)
