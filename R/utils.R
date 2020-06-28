@@ -11,10 +11,12 @@ kaggle_build_script <- function(command, verbose = TRUE) {
     stop("Unable to determine OS")
   }
 
+  kaggle_call <- system2("kaggle", command, env = path, stdout = TRUE)
+
   if (grepl("--csv", command)) {
-    return(utils::read.csv(text = system2("kaggle", command, env = path, stdout = TRUE)))
+    return(utils::read.csv(text = kaggle_call))
   } else {
-    return(system2("kaggle", command, env = path))
+    return(writeLines(kaggle_call))
   }
 
   return(invisible(NULL))
