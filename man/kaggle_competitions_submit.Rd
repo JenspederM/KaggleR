@@ -24,9 +24,11 @@ kaggle_competitions_submit(
 Note: you will need to accept competition rules at https://www.kaggle.com/c/<competition-name>/rules.
 }
 \examples{
+\dontrun{
 kaggle_competitions_submit(competition = "favorita-grocery-sales-forecasting",
                            file_name = "sample_submission_favorita.csv.7z",
                            message = "My submission message")
+}
 
 
 }

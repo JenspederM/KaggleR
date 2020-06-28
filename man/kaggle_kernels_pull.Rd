@@ -17,7 +17,9 @@ kaggle_kernels_pull(kernel, path = NULL, metadata = FALSE)
 Pull a Kernel
 }
 \examples{
+\dontrun{
 kaggle_kernels_pull(kernel = "rtatman/list-of-5-day-challenges", path = "/path/to/dest")
+}
 
 
 }

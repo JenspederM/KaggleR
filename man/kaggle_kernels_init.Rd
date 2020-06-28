@@ -13,7 +13,9 @@ kaggle_kernels_init(folder)
 Initialize Metadata File for a Kernel
 }
 \examples{
+\dontrun{
 kaggle_kernels_init(folder = "./path/to/kernel")
+}
 
 
 }

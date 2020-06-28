@@ -17,7 +17,9 @@ kaggle_datasets_metadata(dataset, path = NULL, update = FALSE)
 Download Metadata for an Existing Dataset
 }
 \examples{
+\dontrun{
 kaggle_datasets_metadata(dataset = "zillow/zecon", path = "./path/to/download")
+}
 
 
 }

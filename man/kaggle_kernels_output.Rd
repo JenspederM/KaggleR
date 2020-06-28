@@ -19,7 +19,9 @@ kaggle_kernels_output(kernel, path = NULL, force = FALSE, quiet = FALSE)
 Retrieve a Kernel's output
 }
 \examples{
+\dontrun{
 kaggle_kernels_output(kernel = "mrisdal/exploring-survival-on-the-titanic", path = "/path/to/dest")
+}
 
 
 }

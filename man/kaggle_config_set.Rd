@@ -18,7 +18,9 @@ Valid values depending on name
 - proxy: Proxy for HTTP requests
 }
 \examples{
+\dontrun{
 kaggle_config_set(name = "competition", value = "titanic")
+}
 
 
 }

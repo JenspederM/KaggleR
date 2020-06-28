@@ -27,7 +27,9 @@ kaggle_datasets_create(
 Create a new dataset
 }
 \examples{
+\dontrun{
 kaggle_datasets_create(folder = "./path/to/dataset")
+}
 
 
 }

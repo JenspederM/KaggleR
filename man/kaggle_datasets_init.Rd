@@ -13,7 +13,9 @@ kaggle_datasets_init(folder)
 Initialize Metadata file for Dataset Creation
 }
 \examples{
+\dontrun{
 kaggle_datasets_init(folder = "./path/to/dataset")
+}
 
 
 }

@@ -27,9 +27,11 @@ kaggle_competitions_download_files(
 Note: you will need to accept competition rules at https://www.kaggle.com/c/<competition-name>/rules.
 }
 \examples{
+\dontrun{
 kaggle_competitions_download_files(competition = "favorita-grocery-sales-forecasting")
 kaggle_competitions_download_files(competition = "favorita-grocery-sales-forecasting",
                                    file_name = "test.csv.7z")
+}
 
 
 }

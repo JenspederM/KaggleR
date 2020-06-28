@@ -13,7 +13,9 @@ kaggle_kernels_push(folder)
 Push a Kernel
 }
 \examples{
+\dontrun{
 kaggle_kernels_push(folder = "./path/to/kernel")
+}
 
 
 }

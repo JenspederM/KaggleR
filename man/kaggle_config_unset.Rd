@@ -13,7 +13,9 @@ kaggle_config_unset(name)
 Clear a configuration value
 }
 \examples{
+\dontrun{
 kaggle_config_unset(name = "competition")
+}
 
 
 }

@@ -28,10 +28,13 @@ If both download and show are `TRUE`, then quiet will be `TRUE` as well.
 }
 \examples{
 kaggle_competitions_leaderboard(competition = "favorita-grocery-sales-forecasting")
+
+\dontrun{
 kaggle_competitions_leaderboard(competition = "favorita-grocery-sales-forecasting",
                                 download = TRUE)
 kaggle_competitions_leaderboard(competition = "favorita-grocery-sales-forecasting",
                                 download = TRUE, path = "./path")
+}
 
 
 }

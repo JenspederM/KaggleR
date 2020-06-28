@@ -30,7 +30,9 @@ kaggle_datasets_version(
 Creata a New Dataset Version
 }
 \examples{
+\dontrun{
 kaggle_datasets_version(folder = "./path/to/dataset", version_notes = "Updated data")
+}
 
 
 }
