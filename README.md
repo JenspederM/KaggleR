@@ -14,7 +14,11 @@ For each category, all the corresponding commands from the Kaggle API has been a
 
 ## Installation
 
-For the `KaggleR` pacakge to work, the official [Kaggle API](https://github.com/Kaggle/kaggle-api) must be installed. Furthermore, authentication is required to interact with the Kaggle platform. Here, I have copied (and slightly modified) the relevant sections from Kaggle's documentation.
+For the `KaggleR` pacakge to work, the official [Kaggle API](https://github.com/Kaggle/kaggle-api) must be installed. Furthermore, authentication is required to interact with the Kaggle platform. Here, I have copied (and slightly modified) the relevant sections from Kaggle's documentation. Once you have finished these steps, the `KaggleR` package can be installed with this command:
+
+```
+devtools::install_github("JensPederM/KaggleR")
+```
 
 ### Installing the official Kaggle API
 
@@ -24,7 +28,7 @@ Run the following command to access the Kaggle API using the command line:
 
 `pip install kaggle` (You may need to do `pip install --user kaggle` on Mac/Linux. This is recommended if problems come up during the installation process.) Installations done through the root user (i.e. `sudo pip install kaggle`) will not work correctly unless you understand what you're doing. Even then, they still might not work. User installs are strongly recommended in the case of permissions errors.
 
-If you run into a kaggle: command not found error, ensure that your python binaries are on your path. You can see where kaggle is installed by doing `pip uninstall kaggle` and seeing where the binary is. For a local user install on Linux, the default location is `~/.local/bin`. On Windows, the default location is `$PYTHON_HOME/Scripts`.
+If you run into a `kaggle: command not found error`, ensure that your python binaries are on your path. You can see where kaggle is installed by doing `pip uninstall kaggle` and seeing where the binary is. For a local user install on Linux, the default location is `~/.local/bin`. On Windows, the default location is `$PYTHON_HOME/Scripts`.
 
 IMPORTANT: Kaggle's API does not offer Python 2 support. Please ensure that you are using Python 3 before reporting any issues.
 
@@ -45,10 +49,3 @@ export KAGGLE_KEY=xxxxxxxxxxxxxx
 
 In addition, you can export any other configuration value that normally would be in the `$HOME/.kaggle/kaggle.json` in the format 'KAGGLE_' (note uppercase).
 For example, if the file had the variable "proxy" you would export `KAGGLE_PROXY` and it would be discovered by the client.
-
-### Installing the `KaggleR` Package
-
-To install the `KaggleR` package use:
-```
-devtools::install_github("JensPederM/KaggleR")
-```
