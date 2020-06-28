@@ -12,35 +12,13 @@ kaggle_build_script <- function(command, verbose = TRUE) {
   }
 
   if (grepl("--csv", command)) {
-    return(utils::read.csv(text = system2("kaggle", command, env = path, stdout = TRUE)))
+    return(utils::read.csv(text = system2("kaggle", command, env = path, stdout = TRUE), encoding = "UTF-8"))
   } else {
     return(system2("kaggle", command, env = path))
   }
 
   return(invisible(NULL))
 }
-
-# Redirect output to csv and read as data.frame ---------------------------
-kaggle_command_to_df <- function(command, verbose = TRUE) {
-  if (isTRUE(verbose)) cat("Executing command: kaggle", command, "\n\n")
-
-  # Initiate temporary file
-  tmp <- tempfile(fileext = ".csv")
-  on.exit(unlink(tmp))
-
-  # Execute command
-  if (.Platform$OS.type == "unix") {
-    kaggle_build_script(paste(command, "--csv", "&>", tmp), verbose = FALSE)
-  } else if (.Platform$OS.type == "windows") {
-    system2("kaggle", paste(command, "--csv"), stdout = tmp)
-  } else {
-    stop("Unable to determine OS")
-  }
-
-  # Return Data.Frame
-  return(utils::read.csv(tmp))
-}
-
 
 # Redirect output to csv and read as list ---------------------------------
 kaggle_get_config <- function(command, verbose = TRUE) {

@@ -96,7 +96,9 @@ kaggle_datasets_download <- function(dataset, file_name = NULL, path = NULL, unz
 #'
 #'
 #' @examples
+#' \dontrun{
 #' kaggle_datasets_init(folder = "./path/to/dataset")
+#' }
 #'
 #'
 #' @export
