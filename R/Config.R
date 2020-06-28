@@ -23,7 +23,9 @@ kaggle_config_view <- function() {
 #'
 #'
 #' @examples
+#' \dontrun{
 #' kaggle_config_set(name = "competition", value = "titanic")
+#' }
 #'
 #'
 #' @export
@@ -40,7 +42,9 @@ kaggle_config_set <- function(name, value) {
 #'
 #'
 #' @examples
+#' \dontrun{
 #' kaggle_config_unset(name = "competition")
+#' }
 #'
 #'
 #' @export

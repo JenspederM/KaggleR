@@ -51,7 +51,9 @@ kaggle_kernels_list <- function(mine = FALSE, page = NULL, size = 20, search = N
 #'
 #'
 #' @examples
+#' \dontrun{
 #' kaggle_kernels_init(folder = "./path/to/kernel")
+#' }
 #'
 #'
 #' @export
@@ -67,7 +69,9 @@ kaggle_kernels_init <- function(folder) {
 #'
 #'
 #' @examples
+#' \dontrun{
 #' kaggle_kernels_push(folder = "./path/to/kernel")
+#' }
 #'
 #'
 #' @export
@@ -86,7 +90,9 @@ kaggle_kernels_push <- function(folder) {
 #'
 #'
 #' @examples
+#' \dontrun{
 #' kaggle_kernels_pull(kernel = "rtatman/list-of-5-day-challenges", path = "/path/to/dest")
+#' }
 #'
 #'
 #' @export
@@ -107,7 +113,9 @@ kaggle_kernels_pull <- function(kernel, path = NULL, metadata = FALSE) {
 #'
 #'
 #' @examples
+#' \dontrun{
 #' kaggle_kernels_output(kernel = "mrisdal/exploring-survival-on-the-titanic", path = "/path/to/dest")
+#' }
 #'
 #'
 #' @export
