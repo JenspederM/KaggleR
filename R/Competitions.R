@@ -59,9 +59,11 @@ kaggle_competitions_files <- function(competition, quiet = FALSE) {
 #'
 #'
 #' @examples
+#' \dontrun{
 #' kaggle_competitions_download_files(competition = "favorita-grocery-sales-forecasting")
 #' kaggle_competitions_download_files(competition = "favorita-grocery-sales-forecasting",
 #'                                    file_name = "test.csv.7z")
+#' }
 #'
 #'
 #' @export
@@ -85,9 +87,11 @@ kaggle_competitions_download_files <- function(competition, file_name = NULL, pa
 #'
 #'
 #' @examples
+#' \dontrun{
 #' kaggle_competitions_submit(competition = "favorita-grocery-sales-forecasting",
 #'                            file_name = "sample_submission_favorita.csv.7z",
 #'                            message = "My submission message")
+#' }
 #'
 #'
 #' @export
@@ -133,10 +137,13 @@ kaggle_competitions_submissions <- function(competition, quiet = FALSE) {
 #'
 #' @examples
 #' kaggle_competitions_leaderboard(competition = "favorita-grocery-sales-forecasting")
+#'
+#' \dontrun{
 #' kaggle_competitions_leaderboard(competition = "favorita-grocery-sales-forecasting",
 #'                                 download = TRUE)
 #' kaggle_competitions_leaderboard(competition = "favorita-grocery-sales-forecasting",
 #'                                 download = TRUE, path = "./path")
+#' }
 #'
 #'
 #' @export
