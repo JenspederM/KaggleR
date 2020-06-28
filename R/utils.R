@@ -12,7 +12,7 @@ kaggle_build_script <- function(command, verbose = TRUE) {
   }
 
   if (grepl("--csv", command)) {
-    return(utils::read.csv(text = system2("kaggle", command, env = path, stdout = TRUE), encoding = "UTF-8"))
+    return(utils::read.csv(text = system2("kaggle", command, env = path, stdout = TRUE)))
   } else {
     return(system2("kaggle", command, env = path))
   }
@@ -22,19 +22,15 @@ kaggle_build_script <- function(command, verbose = TRUE) {
 
 # Redirect output to csv and read as list ---------------------------------
 kaggle_get_config <- function(command, verbose = TRUE) {
-  on.exit(unlink(tmp))
-  if (isTRUE(verbose)) {
-    cat("Executing command: ", command, "\n\n")
-  }
-  tmp <- tempfile(fileext = ".csv")
-  kaggle_build_script(paste(command, "&>", tmp), verbose = FALSE)
-  output <- readLines(tmp)[-1]
-  output <- gsub("-", "", output)
-  output <- strsplit(output, ":")
-  output_names <- lapply(output, function(x) trimws(x[[1]]))
-  output_values <- lapply(output, function(x) trimws(x[[2]]))
-  output <- stats::setNames(object = output_values, nm = output_names)
-  return(output)
+  tmp <- system2("kaggle", "config view", env = path, stdout = TRUE)
+  if (isTRUE(verbose)) cat(tmp[1])
+  tmp <- tmp[-1]
+  tmp <- gsub("-|:", "", tmp)
+  tmp <- trimws(tmp)
+  tmp <- strsplit(tmp, " ")
+  output_names <- vapply(tmp, `[[`, 1, FUN.VALUE = "")
+  output_values <- vapply(tmp, `[[`, 2, FUN.VALUE = "")
+  return(data.frame("config_name" = output_names, "config_value" = output_values))
 }
 
 
