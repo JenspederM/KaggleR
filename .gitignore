@@ -2,3 +2,6 @@
 .Rhistory
 .RData
 .Ruserdata
+*.log
+*.nb.html
+*.Rmd
