@@ -1,7 +1,7 @@
 Package: KaggleR
 Type: Package
 Title: Wrapper for the Kaggle API
-Version: 0.1.0
+Version: 0.1.1
 Author: Jens Peder Meldgaard
 Maintainer: Jens Peder Meldgaard <jenspederm@gmail.com>
 Description: Provides a R interface for the Kaggle API.
