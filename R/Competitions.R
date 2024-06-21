@@ -2,7 +2,6 @@
 #' List Competitions
 #'
 #' @param group Search for competitions in a specific group. Default is 'general'. Valid options are 'general', 'entered', and 'inClass'
-#' @param category Search for competitions of a specific category. Default is 'all'. Valid options are 'all', 'featured', 'research', 'recruitment', 'gettingStarted', 'masters', and 'playground'
 #' @param sort_by Sort list results. Default is 'latestDeadline'. Valid options are 'grouped', 'prize', 'earliestDeadline', 'latestDeadline', 'numberOfTeams', and 'recentlyCreated'
 #' @param search Term(s) to search for
 #' @return `data.frame`
@@ -15,12 +14,10 @@
 #'
 #' @export
 kaggle_competitions_list <- function(group = c('general', 'entered', 'inClass'),
-                                     category = c('all', 'featured', 'research', 'recruitment', 'gettingStarted', 'masters', 'playground'),
                                      sort_by = c('latestDeadline','grouped', 'prize', 'earliestDeadline',  'numberOfTeams', 'recentlyCreated'),
                                      search = NULL) {
   cmd <- paste("competitions list",
                "--group", match.arg(group),
-               "--category", match.arg(category),
                "--sort-by", match.arg(sort_by),
                "--csv")
   cmd <- add_search(cmd, search)
