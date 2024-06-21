@@ -5,16 +5,23 @@ kaggle_build_script <- function(command, verbose = TRUE) {
 
   if (.Platform$OS.type == "unix") {
     path <- "PATH=~/.local/bin:$PATH"
+    path <- "PATH=~/.asdf/shims:$PATH"
   } else if (.Platform$OS.type == "windows") {
     path <- character()
   } else {
     stop("Unable to determine OS")
   }
 
-  kaggle_call <- system2("kaggle", command, env = path, stdout = TRUE)
+  kaggle_call <- system2("kaggle", command, env = path, stdout = TRUE, stderr = "error.log")
 
   if (grepl("--csv", command)) {
-    return(utils::read.csv(text = kaggle_call))
+    tryCatch(
+      return(utils::read.csv(text = kaggle_call)),
+      error = function(e) {
+        print(sprintf("There was a problem: %s", e))
+        return(writeLines(kaggle_call))
+      }
+    )
   } else {
     return(writeLines(kaggle_call))
   }
@@ -42,33 +49,33 @@ kaggle_build_add_argument <- function(argument = NULL, type = c("istrue", "isnul
   type <- match.arg(type)
 
   switch (type,
-    istrue = return(
-      function(command, value = NULL) {
-        if (isTRUE(value)) {
-          return(paste(command, argument))
-        } else {
-          return(command)
-        }
-      }
-    ),
-    isnull = return(
-      function(command, value = NULL) {
-        if (!is.null(value)) {
-          return(paste(command, argument, value))
-        } else {
-          return(command)
-        }
-      }
-    ),
-    check = return(
-      function(command, value = NULL) {
-        if (!is.null(value)) {
-          return(paste(command, value))
-        } else {
-          return(command)
-        }
-      }
-    )
+          istrue = return(
+            function(command, value = NULL) {
+              if (isTRUE(value)) {
+                return(paste(command, argument))
+              } else {
+                return(command)
+              }
+            }
+          ),
+          isnull = return(
+            function(command, value = NULL) {
+              if (!is.null(value)) {
+                return(paste(command, argument, value))
+              } else {
+                return(command)
+              }
+            }
+          ),
+          check = return(
+            function(command, value = NULL) {
+              if (!is.null(value)) {
+                return(paste(command, value))
+              } else {
+                return(command)
+              }
+            }
+          )
   )
 }
 
